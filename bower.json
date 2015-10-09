@@ -7,7 +7,7 @@
     "example"
   ],
   "dependencies": {
-    "chosen": "git://github.com/harvesthq/chosen.git#f093b3930e83f2fd656fe63d6cdb35cac52a74dc",
+    "chosen": "~>1.4.2",
     "angular": ">=1.2.0"
   }
 }
