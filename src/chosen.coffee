@@ -1,3 +1,5 @@
+alert "chosen development"
+
 angular.module('localytics.directives', [])
 
 angular.module('localytics.directives').directive 'chosen', ['$timeout', ($timeout) ->
