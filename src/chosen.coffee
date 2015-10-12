@@ -1,6 +1,7 @@
-angular.module('localytics.directives', [])
+console.log "chosen.coffee"
+angular.module('yousource.directives', [])
 
-angular.module('localytics.directives').directive 'chosen', ['$timeout', ($timeout) ->
+angular.module('yousource.directives').directive 'chosen', ['$timeout', ($timeout) ->
 
   # This is stolen from Angular...
   NG_OPTIONS_REGEXP = /^\s*(.*?)(?:\s+as\s+(.*?))?(?:\s+group\s+by\s+(.*))?\s+for\s+(?:([\$\w][\$\w]*)|(?:\(\s*([\$\w][\$\w]*)\s*,\s*([\$\w][\$\w]*)\s*\)))\s+in\s+(.*?)(?:\s+track\s+by\s+(.*?))?$/
