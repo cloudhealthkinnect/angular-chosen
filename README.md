@@ -19,6 +19,7 @@ use the "chosen" directive as an attribute on any select element.  Angular versi
   * Supports usage of promises in `ngOptions`
   * Provides a 'loading' animation when 'ngOptions' collection is a promise backed by a remote source
   * Pass options to `Chosen` via attributes or by passing an object to the Chosen directive
+  * Includes a `type ahead` capability.
 
 # Usage
 
@@ -130,4 +131,4 @@ See the example directory for more detailed usage.
 
 The `ch-type-ahead-value` attribute binds `bindingVariable` to the text being typed by the user on the Chosen input box.  
 
-The expression in `ch-tyep-ahead-keyup` is executed for every keystroke done by the user in the Chosen input box. This allows you to do a query on your API while the user is typing the query.
+The expression in `ch-type-ahead-keyup` is executed for every keystroke done by the user in the Chosen input box. This allows you to do a query on your API while the user is typing the query.
