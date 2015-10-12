@@ -51,20 +51,20 @@ angular.module('yousource.directives').directive 'chosen', ['$timeout', '$parse'
     #We do this because the Angular digest cycle is slow, and when the user types fast,
     #it is not fast enough to keep up witht he user, and gives the illusion that the last 
     #one or 2 characters of the input text is deleted
-    $(element).on 'chosen:before_update', ->
-      type_ahead_value = $(this).attr("ch-type-ahead-value")
-      the_container = $(this).parent().find('.chosen-container')
-      search_text = the_container.find("input[type='text']").val()
-      $scope.$eval(type_ahead_value + "='" + search_text + "'" )
+    # $(element).on 'chosen:before_update', ->
+    #   type_ahead_value = $(this).attr("ch-type-ahead-value")
+    #   the_container = $(this).parent().find('.chosen-container')
+    #   search_text = the_container.find("input[type='text']").val()
+    #   $scope.$eval(type_ahead_value + "='" + search_text + "'" )
 
-    #the chosen GUI will be updated, all stuff gone
-    $(element).on 'chosen:updated', ->
-                                    #Retain typed value to the input
-                                    type_ahead_value = $(this).attr("ch-type-ahead-value")
-                                                          search_text = $scope.$eval(type_ahead_value)
-                                                                $(this).parent().find("input[type='text']").val(search_text)
+    # #the chosen GUI will be updated, all stuff gone
+    # $(element).on 'chosen:updated', ->
+    #                                 #Retain typed value to the input
+    #                                 type_ahead_value = $(this).attr("ch-type-ahead-value")
+    #                                                       search_text = $scope.$eval(type_ahead_value)
+    #                                                             $(this).parent().find("input[type='text']").val(search_text)
     
-    $(element).on 'chosen:before_update', ->
+    # $(element).on 'chosen:before_update', ->
 
 
     element.addClass('localytics-chosen')
