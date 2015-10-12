@@ -1,7 +1,6 @@
-console.log "chosen.coffee"
 angular.module('yousource.directives', [])
 
-angular.module('yousource.directives').directive 'chosen', ['$timeout', ($timeout) ->
+angular.module('yousource.directives').directive 'chosen', ['$timeout', '$parse', ($timeout, $parse) ->
 
   # This is stolen from Angular...
   NG_OPTIONS_REGEXP = /^\s*(.*?)(?:\s+as\s+(.*?))?(?:\s+group\s+by\s+(.*))?\s+for\s+(?:([\$\w][\$\w]*)|(?:\(\s*([\$\w][\$\w]*)\s*,\s*([\$\w][\$\w]*)\s*\)))\s+in\s+(.*?)(?:\s+track\s+by\s+(.*?))?$/
@@ -36,6 +35,37 @@ angular.module('yousource.directives').directive 'chosen', ['$timeout', ($timeou
   require: '?ngModel'
   terminal: true
   link: (scope, element, attr, ngModel) ->
+
+    $(element).parent().on 'keyup', ".chosen-container input[type='text']", (event) ->
+      #ch-type-ahead-value: storage of typed-ahead value
+      if attr.chTypeAheadValue
+        current_typed = $(event.target)
+        ch_type_ahead_value = $parse(attr.chTypeAheadValue)
+        ch_type_ahead_value.assign(scope, current_typed.val())
+
+      #ch-type-ahead-keyup: expression to execute on each keyup
+      if attr.chTypeAheadKeyup
+        scope.$eval(attr.chTypeAheadKeyup)
+
+    #We save the text before clearing everything in a hidden field
+    #We do this because the Angular digest cycle is slow, and when the user types fast,
+    #it is not fast enough to keep up witht he user, and gives the illusion that the last 
+    #one or 2 characters of the input text is deleted
+    $(element).on 'chosen:before_update', ->
+      type_ahead_value = $(this).attr("ch-type-ahead-value")
+      the_container = $(this).parent().find('.chosen-container')
+      search_text = the_container.find("input[type='text']").val()
+      $scope.$eval(type_ahead_value + "='" + search_text + "'" )
+
+    #the chosen GUI will be updated, all stuff gone
+    $(element).on 'chosen:updated', ->
+                                    #Retain typed value to the input
+                                    type_ahead_value = $(this).attr("ch-type-ahead-value")
+                                                          search_text = $scope.$eval(type_ahead_value)
+                                                                $(this).parent().find("input[type='text']").val(search_text)
+    
+    $(element).on 'chosen:before_update', ->
+
 
     element.addClass('localytics-chosen')
 
@@ -100,6 +130,8 @@ angular.module('yousource.directives').directive 'chosen', ['$timeout', ($timeou
           if angular.isUndefined(newVal)
             startLoading()
           else
+            console.log "Here"
+            element.trigger 'chosen:before_update'
             removeEmptyMessage() if empty
             stopLoading()
             disableWithMessage() if isEmpty(newVal)

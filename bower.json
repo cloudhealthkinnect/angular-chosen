@@ -1,7 +1,7 @@
 {
   "name": "angular-chosen-yousource",
   "version": "1.1.2",
-  "main": "chosen.js",
+  "main": "chosen.js.coffee",
   "ignore": [
     "src",
     "example"
