@@ -6,15 +6,13 @@ AngularJS Chosen directive
 This directive brings the [Chosen](http://harvesthq.github.com/chosen/) jQuery plugin
 into AngularJS with ngModel and ngOptions integration.
 
-To use, include "localytics.directives" as a dependency in your Angular module.  You can now
+To use, include "yousource.directives" as a dependency in your Angular module.  You can now
 use the "chosen" directive as an attribute on any select element.  Angular version 1.2+ is required.
 
 # Installation
 
-    $ bower install angular-chosen-localytics --save
-
-## Yeoman or Bower install
-If you use Yeoman or Bower install, you need to rename the `chosen.jquery.js` or the `chosen.proto.js` to `chosen.js`. Otherwise Chosen won't be included in your `index.html`.
+    $ bower install angular-chosen-yousource --save
+    $ gem install rails-assets-angular-chosen-yousource
 
 # Features
   * Works with `ngModel` and `ngOptions`
@@ -117,3 +115,19 @@ once the promise returns.  The loader animation will still work as long as the c
 evaluates to `undefined` while your data is loading!
 
 See the example directory for more detailed usage.
+
+### Type Ahead
+
+```html
+<select chosen
+        ch-type-ahead-value="bindingVariable"
+        ch-type-ahead-keyup="doSomethingInteresting()"
+        ng-model="state"
+        ng-options="s for s in states"
+        ng-disabled="editable">
+</select>
+```
+
+The `ch-type-ahead-value` attribute binds `bindingVariable` to the text being typed by the user on the Chosen input box.  
+
+The expression in `ch-tyep-ahead-keyup` is executed for every keystroke done by the user in the Chosen input box. This allows you to do a query on your API while the user is typing the query.
